@@ -318,6 +318,20 @@ def chain(cosmo, data, command_line):
                     else:
                         f.write('%.6e\t' % bf_value)
                 f.write('\n')
+
+            ###Alex Reeves edit### Add in functionlity to save a scaled bestfit file 
+            fname_bf = os.path.join(command_line.folder, 'minimiser.bestfit')
+            
+            with open(fname_bf, 'w') as f:
+                f.write('# %s\n' % ', '.join(['%16s' % label for label in labels]))
+                for idx in xrange(len(labels)):
+                    bf_value = minimum[idx]*data.mcmc_parameters[labels[idx]]['scale']
+                    if bf_value > 0:
+                        f.write(' %.6e\t' % bf_value)
+                    else:
+                        f.write('%.6e\t' % bf_value)
+                f.write('\n')  
+
             print('Results of minimizer saved to: \n', fname)
 
         # if we want to compute Fisher matrix and then stop
