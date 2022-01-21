@@ -509,7 +509,8 @@ def get_minimum(cosmo, data, command_line, covmat):
                                 args=(cosmo, data),
                                 bounds=bounds,
                                 scaling_within_bounds=True,
-                                rhoend=command_line.minimize_tol)
+                                rhoend=command_line.minimize_tol, 
+                                seek_global_minimum=True)
 
         print('Final output of minimize')
 
